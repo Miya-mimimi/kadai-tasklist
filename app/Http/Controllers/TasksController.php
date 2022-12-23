@@ -17,10 +17,11 @@ class TasksController extends Controller
     {
         
         if (\Auth::check()) {
-        
-            $user = \Auth::user();
             
-            $tasks = Task::all();
+            // 認証済みユーザの取得
+            $user = \Auth::user();
+                
+            $tasks = $user->tasklists()->orderBy('created_at', 'desc')->paginate(10);
             
         }
         
@@ -40,8 +41,11 @@ class TasksController extends Controller
         $task = new Task;
         
         return view('tasks.create', [
-            'task' => $task,
+                'task' => $task,
         ]);
+        
+        return redirect('/dashboard');
+        
     }
 
     /**
@@ -82,9 +86,16 @@ class TasksController extends Controller
     {
         $task = \App\Models\Task::findOrFail($id);
         
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+        if (\Auth::id() === $task->user_id) {
+            
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+            
+        }
+        else {
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -97,10 +108,14 @@ class TasksController extends Controller
     {
         $task = \App\Models\Task::findOrFail($id);
         
-        
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+        if (\Auth::id() === $task->user_id) {
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+        }
+        else {
+            return redirect('/dashboard');
+        }
     }
 
     /**

@@ -1,6 +1,6 @@
-# fly.toml file generated for tasklist1222 on 2022-12-22T06:36:22Z
+# fly.toml file generated for tasklist1223 on 2022-12-23T09:24:24Z
 
-app = "tasklist1222"
+app = "tasklist1223"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -11,18 +11,18 @@ processes = []
     PHP_VERSION = "8.1"
 
 [env]
+  APP_DEBUG = "false"
   APP_ENV = "production"
+  APP_NAME = "Laravel"
+  APP_URL = "https//tasklist1223.fly.dev"
+  DB_CONNECTION = "pgsql"
+  DB_DATABASE = "postgres"
+  DB_HOST = "db.zlhrjfomcwspqxtmgmgk.supabase.co"
+  DB_PORT = "5432"
+  DB_USERNAME = "postgres"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
-  APP_URL = "https//tasklist1222.fly.dev"
-  APP_NAME = "Laravel"
-  APP_DEBUG = false
-  DB_CONNECTION = "pgsql"
-  DB_HOST = "db.zlhrjfomcwspqxtmgmgk.supabase.co"
-  DB_PORT = 5432
-  DB_DATABASE = "postgres"
-  DB_USERNAME = "postgres"
 
 [experimental]
   allowed_public_ports = []
